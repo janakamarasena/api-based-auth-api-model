@@ -3,6 +3,7 @@
     "nonce": "weikfbj2321edws",
     "flowType": "authentication",
     "flowSubType": "multi_options_prompt",
+    "flowStatus" : "INCOMPLETE",
     "prompt": {
         "authenticators": [
             {
@@ -36,7 +37,8 @@
                 "type": "STRING",
                 "order": 0
             }
-        ]
+        ],
+        "messages": []
     },
     "_links": {
         "authenticate": {

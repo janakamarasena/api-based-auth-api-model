@@ -3,6 +3,7 @@
     "nonce": "weikfbj2321edws",
     "flowType": "authentication",
     "flowSubType": "authenticator_prompt_local",
+    "flowStatus" : "INCOMPLETE",
     "selectedAuthenticator": "fidoAuthenitcator",
     "selectedIdp": "LOCAL",
     "i18nString": "fido.authenticator",
@@ -18,10 +19,17 @@
         ],
         "authenticatorData": {
             "challengeData": "{\"requestId\":\"fUhM1vvQf8CAaJxyH2oxF_JOnz8ks5xjgyZdtnKZYsM\",\"publicKeyCredentialRequestOptions\":{\"challenge\":\"57cBTB-dxWgrhvjXPBWC9gSuoCYEtQFEKihBYZszrZM\",\"rpId\":\"localhost\",\"extensions\":{}}}"
-        }
+        },
+        "messages": [
+            {
+                "type": "info",
+                "messageId": "flow_restart",
+                "message": "The flow was restarted due to browser change detection."
+            }
+        ]
     },
     "_links": {
-        "authenticate": {
+        "next": {
             "name": "authenticate",
             "href": "/api/authenticate/v1",
             "method": "POST"

@@ -3,7 +3,7 @@
     "nonce": "weikfbj2321edws",
     "flowType": "authentication",
     "flowSubType": "authenticator_prompt_local",
-    "flowStatus" : "INCOMPLETE",
+    "flowStatus" : "FAIL_INCOMPLETE",
     "selectedAuthenticator": "basicAuthenitcator",
     "selectedIdp": "LOCAL",
     "i18nString": "basic.authenticator",
@@ -26,7 +26,13 @@
                 "order": 1
             }
         ],
-        "messages": []
+        "messages": [
+            {
+                "type": "error",
+                "messageId" : "invalid_username_password",
+                "message": "Invalid username or password."
+            }
+        ]
     },
     "_links": {
         "authenticate": {
