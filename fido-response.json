@@ -3,28 +3,22 @@
     "nonce": "weikfbj2321edws",
     "flowType": "authentication",
     "flowSubType": "authenticator_prompt_local",
-    "selectedAuthenticator": "basicAuthenitcator",
+    "selectedAuthenticator": "fidoAuthenitcator",
     "selectedIdp": "LOCAL",
-    "i18nString": "basic.authenticator",
+    "i18nString": "fido.authenticator",
     "prompt": {
-        "type": "user_prompt",
+        "type": "internal_prompt",
         "requiredParams": [
             {
-                "param": "username",
+                "param": "tokenResponse",
                 "isConfidential": false,
-                "i18nString": "param.username",
                 "type": "STRING",
-                "order": 0,
-                "validationRegex": "^[\\S]{3,50}$"
-            },
-            {
-                "param": "password",
-                "isConfidential": true,
-                "i18nString": "param.password",
-                "type": "STRING",
-                "order": 1
+                "order": 0
             }
-        ]
+        ],
+        "authenticatorData": {
+            "challengeData": "{\"requestId\":\"fUhM1vvQf8CAaJxyH2oxF_JOnz8ks5xjgyZdtnKZYsM\",\"publicKeyCredentialRequestOptions\":{\"challenge\":\"57cBTB-dxWgrhvjXPBWC9gSuoCYEtQFEKihBYZszrZM\",\"rpId\":\"localhost\",\"extensions\":{}}}"
+        }
     },
     "_links": {
         "authenticate": {

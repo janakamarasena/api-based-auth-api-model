@@ -1,27 +1,26 @@
 {
     "flowId": "21a10385-a517-4d74-98b4-058c6a794270",
+    "nonce": "weikfbj2321edws",
     "flowType": "authentication",
+    "flowSubType": "authenticator_prompt_federation",
     "selectedAuthenticator": "OpenIDConnectAuthenticator",
     "selectedIdp": "google",
     "i18nString": "oidc.authenticator",
-    "type":"Federation",
     "prompt": [
         {
             "type": "redirection",
             "requiredParams": [
                 {
-                    "isConfidential": false,
                     "param": "state",
                     "type": "STRING",
-                    "order": 0,
-                    "isUserPrompt": false
+                    "isConfidential": false,
+                    "order": 0
                 },
                 {
-                    "isConfidential": false,
                     "param": "code",
                     "type": "STRING",
-                    "order": 1,
-                    "isUserPrompt": false
+                    "isConfidential": false,
+                    "order": 1
                 }
             ],
             "authenticatorData": {
@@ -29,24 +28,29 @@
             }
         },
         {
-            "type": "internal_prompt",
+            "type": "internal",
             "requiredParams": [
                 {
-                    "isConfidential": false,
                     "param": "accessToken",
                     "type": "STRING",
-                    "order": 0,
-                    "isUserPrompt": false
+                    "isConfidential": false,
+                    "order": 0
                 },
                 {
-                    "isConfidential": false,
                     "param": "idToken",
                     "type": "STRING",
-                    "order": 1,
-                    "isUserPrompt": false
+                    "isConfidential": false,
+                    "order": 1
                 }
             ]
         }
 
-    ]
+    ],
+    "_links": {
+        "authenticate": {
+            "name": "authenticate",
+            "href": "/api/authenticate/v1",
+            "method": "POST"
+        }
+    }
 }
