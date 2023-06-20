@@ -1,0 +1,27 @@
+{
+    "flowId": "21a10385-a517-4d74-98b4-058c6a794270",
+    "flowType": "authentication",
+    "flowSubType": "authenticator_prompt_local",
+    "selectedAuthenticator": "basicAuthenitcator",
+    "selectedIdp": "LOCAL",
+    "i18nString": "basic.authenticator",
+    "type": "LOCAL",
+    "requiredParams": [
+        {
+            "param": "username",
+            "isConfidential": false,
+            "i18nString": "param.username",
+            "type": "STRING",
+            "order": 0,
+            "group": 0
+        },
+        {
+            "param": "password",
+            "isConfidential": true,
+            "i18nString": "param.password",
+            "type": "STRING",
+            "order": 1,
+            "group": 0
+        }
+    ]
+}

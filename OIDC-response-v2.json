@@ -1,0 +1,52 @@
+{
+    "flowId": "21a10385-a517-4d74-98b4-058c6a794270",
+    "flowType": "authentication",
+    "selectedAuthenticator": "OpenIDConnectAuthenticator",
+    "selectedIdp": "google",
+    "i18nString": "oidc.authenticator",
+    "type":"Federation",
+    "prompt": [
+        {
+            "type": "redirection",
+            "requiredParams": [
+                {
+                    "isConfidential": false,
+                    "param": "state",
+                    "type": "STRING",
+                    "order": 0,
+                    "isUserPrompt": false
+                },
+                {
+                    "isConfidential": false,
+                    "param": "code",
+                    "type": "STRING",
+                    "order": 1,
+                    "isUserPrompt": false
+                }
+            ],
+            "authenticatorData": {
+                "redirectUrl": "https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e1215f2f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=230622702223-d86c3b0ahu68kg74as23592jtvomb1j8.apps.googleusercontent.com&scope=openid"
+            }
+        },
+        {
+            "type": "internal_prompt",
+            "requiredParams": [
+                {
+                    "isConfidential": false,
+                    "param": "accessToken",
+                    "type": "STRING",
+                    "order": 0,
+                    "isUserPrompt": false
+                },
+                {
+                    "isConfidential": false,
+                    "param": "idToken",
+                    "type": "STRING",
+                    "order": 1,
+                    "isUserPrompt": false
+                }
+            ]
+        }
+
+    ]
+}
