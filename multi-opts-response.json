@@ -1,50 +1,44 @@
 {
-    "flowId": "21a10385-a517-4d74-98b4-058c6a794270",
-    "nonce": "weikfbj2321edws",
-    "flowType": "authentication",
-    "flowSubType": "multi_options_prompt",
-    "flowStatus" : "INCOMPLETE",
-    "prompt": {
-        "authenticators": [
-            {
-                "name": "basicAuthenticator",
-                "displayName": "username & password",
-                "idp": "local",
-                "i18nString": "basic.authenticator"
-            },
-            {
-                "name": "FidoAuthenticator",
-                "displayName": "biometric key",
-                "idp": "local",
-                "i18nString": "fido.authenticator"
-            },
-            {
-                "name": "OpenIdAuthenticator",
-                "displayName": "OpenIdAuthenticator",
-                "idp": "Google",
-                "i18nString": "oidc.authenticator"
-            }
-        ],
-        "requiredParams": [
-            {
-                "param": "name",
-                "type": "STRING",
-                "order": 0
-            },
-            {
-                "param": "idp",
-                "isConfidential": false,
-                "type": "STRING",
-                "order": 0
-            }
-        ],
-        "messages": []
+    "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
+    "nonce": "e24edfeas1",
+    "flowStatus": "INCOMPLETE",
+    "flowType": "AUTHENTICATION",
+    "currentStepType": "MULTI_OPTIONS_PROMPT",
+    "currentStep": {
+        "prompt": {
+            "authenticators": [
+                {
+                    "authenticator": "BasicAuthenticator",
+                    "idp": "LOCAL",
+                    "i18Key": "authenticator.basic"
+                },
+                {
+                    "authenticator": "FIDOAuthenticator",
+                    "idp": "LOCAL",
+                    "i18Key": "authenticator.fido"
+                },
+                {
+                    "authenticator": "OpenIDConnectAuthenticator",
+                    "idp": "google",
+                    "i18Key": "authenticator.oidc"
+                }
+            ],
+            "requiredParams": [
+                {
+                    "param": "authenticator"
+                },
+                {
+                    "param": "idp"
+                }
+            ],
+            "messages": []
+        }
     },
-    "_links": {
-        "authenticate": {
-            "name": "authenticate",
+    "links": [
+        {
+            "name": "authentication",
             "href": "/api/authenticate/v1",
             "method": "POST"
         }
-    }
+    ]
 }
