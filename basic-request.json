@@ -4,6 +4,7 @@
     "authenticator": "FIDOAuthenticator",
     "idp": "LOCAL",
     "params": {
-        "johnd": "a#m1N"
+        "username": "johnd",
+        "password": "a#m1N"
     }
 }
