@@ -10,17 +10,17 @@
                 {
                     "authenticator": "BasicAuthenticator",
                     "idp": "LOCAL",
-                    "i18Key": "authenticator.basic"
+                    "i18nKey": "authenticator.basic"
                 },
                 {
                     "authenticator": "FIDOAuthenticator",
                     "idp": "LOCAL",
-                    "i18Key": "authenticator.fido"
+                    "i18nKey": "authenticator.fido"
                 },
                 {
                     "authenticator": "OpenIDConnectAuthenticator",
                     "idp": "google",
-                    "i18Key": "authenticator.oidc"
+                    "i18nKey": "authenticator.oidc"
                 }
             ],
             "requiredParams": [

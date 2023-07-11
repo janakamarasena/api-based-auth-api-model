@@ -19,7 +19,7 @@
                             "isConfidential": false,
                             "order": 1,
                             "validationRegex": "^[\\S]{3,50}$",
-                            "i18Key": "param.username"
+                            "i18nKey": "param.username"
                         }
                     },
                     {
@@ -28,7 +28,7 @@
                             "type": "STRING",
                             "isConfidential": true,
                             "order": 2,
-                            "i18Key": "param.password"
+                            "i18nKey": "param.password"
                         }
                     }
                 ],

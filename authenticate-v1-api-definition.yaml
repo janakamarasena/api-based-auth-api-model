@@ -301,7 +301,7 @@ components:
       required:
         - authenticator
         - idp
-        - i18Key
+        - i18nKey
       properties:
         authenticator:
           type: string
@@ -311,7 +311,7 @@ components:
           type: string
           description: The identity provider identifier.
           example: LOCAL
-        i18Key:
+        i18nKey:
           type: string
           description: The i18n key for the authenticator. This can be used to get the localized message for the
             authenticator.
@@ -335,7 +335,7 @@ components:
         - type
         - isConfidential
         - order
-        - i18Key
+        - i18nKey
       properties:
         type:
           type: string
@@ -357,7 +357,7 @@ components:
           type: string
           description: Contains the regex pattern to validate the parameter value.
           example: ^[\S]{3,50}$
-        i18Key:
+        i18nKey:
           type: string
           description: The i18n key for the parameter. This can be used to get the localized message for the parameter.
           example: param.username

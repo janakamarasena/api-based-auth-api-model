@@ -24,7 +24,7 @@
                         "message": "OTP sent to phone ending with ***466",
                         "context": [
                             {
-                                "key": "remainingAttempts",
+                                "key": "phone",
                                 "value": "***466"
                             }
                         ]
