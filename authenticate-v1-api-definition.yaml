@@ -3,8 +3,8 @@ info:
   description: >
     This document specifies an **Authentication RESTful API** for **WSO2
     Identity Server** which can be used to perform complete user authentication in 
-    an api based manner.
-  version: "v1"
+    an API based manner.
+  version: v1
   title: WSO2 Identity Server - Authentication Rest API
   contact:
     name: WSO2
@@ -19,28 +19,14 @@ paths:
       description: This API provides the capability to perform user authentication.
       requestBody:
         required: true
-        description: |
-          Authentication request body. The request body should be one of the following.
-          - If the authentication step is for authenticator selection then the request body should be
-          a `MultiOptsSelectionRequest`.  
-          - If the authentication step is for authenticating the user through a
-          specific authenticator then the request body should be an `AuthRequest`.
+        description: Authentication request body.
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/AuthRequest'
-                - $ref: '#/components/schemas/MultiOptsSelectionRequest'
+              $ref: '#/components/schemas/AuthRequest'
       responses:
         '200':
-          description: |
-            Ok. 
-            Authentication response body. The response body can be one of the following. 
-            - If the authentication step is for authenticator selection then the response body will be `MultiOptsSelectionResponse`.
-            - If the authentication step is for authenticating the user through a specific authenticator then the response body will be `AuthResponse`.
-            - If there is an authentication failure due to invalid credentials input by the user then the response body 
-            will be `AuthResponse` with FAIL_INCOMPLETE flowStatus and the prompt in the response body will 
-            contain a message with the error reason.
+          description: Ok
           content:
             application/json:
               schema:
@@ -60,12 +46,11 @@ paths:
 components:
   schemas:
     AuthRequest:
-      description: Authentication request body for authenticating the user through a specific authenticator.
+      description: |
+        Authentication request body.
       required:
         - flowId
         - nonce
-        - authenticator
-        - idp
         - params
       type: object
       properties:
@@ -79,49 +64,23 @@ components:
           description: A unique identifier for the authentication request.
             The value of the nonce will change for each request in the flow.
           example: e24edfeas1
-        authenticator:
-          type: string
-          description: The name of the authenticator to be used for authentication.
-          example: BasicAuthenticator
-        idp:
-          type: string
-          description: The name of the identity provider to be used for authentication.
-          example: LOCAL
         params:
           type: object
           description: The parameters required for the authenticator to perform user authentication.
           additionalProperties:
             type: string
           example:
+            authenticator: BasicAuthenticator
+            idp: LOCAL
             username: johnd
             password: a#m1N
-    MultiOptsSelectionRequest:
-      description: Authentication request body for authenticator selection.
-      required:
-        - flowId
-        - nonce
-        - authenticator
-        - idp
-      type: object
-      properties:
-        flowId:
-          type: string
-          description: A unique identifier for the authentication flow.
-            The value of the flowId will remain the same for the entire authentication flow.
-          example: 3bd1f207-e5b5-4b45-8a91-13b0acfb2151
-        nonce:
-          type: string
-          description: A unique identifier for the authentication request.
-            The value of the nonce will change for each request in the flow.
-          example: e24edfeas1
-        authenticator:
-          type: string
-          description: The name of the authenticator to be used for authentication.
-          example: BasicAuthenticator
-        idp:
-          type: string
-          description: The name of the identity provider to be used for authentication.
-          example: LOCAL
+        requireNativeConfig:
+          type: boolean
+          description: |
+            Only applicable for federated authenticators having the capability to do the federation natively. If this is
+            set to true then the response will contain the schema relating to handling the authentication natively (INTERNAL_PROMPT). 
+            If the param is not sent in the request the config will default to the system level configuration.
+          example: true
     AuthResponse:
       type: object
       description: Authentication response body.
@@ -130,7 +89,6 @@ components:
         - nonce
         - flowStatus
         - flowType
-        - currentStepType
         - currentStep
         - links
       properties:
@@ -151,157 +109,66 @@ components:
             - FAIL_INCOMPLETE
           description: |
             The status of the authentication flow. 
-            This api version doesn't define a COMPLETE state 
-            as it will never be sent in a response. When the flow is completed the client will receive the 
-            final response related to the used authentication protocol.
-          example: FAIL_INCOMPLETE
+            This api version doesn't define a COMPLETE state as it will never be sent in a response. When the flow is 
+            completed the client will receive the final response related to the used authentication protocol.
+          example: INCOMPLETE
         flowType:
           type: string
           enum:
             - AUTHENTICATION
           description: The type of the authentication flow. This version only contains flowType AUTHENTICATION.
           example: AUTHENTICATION
-        currentStepType:
-          type: string
-          enum:
-            - MULTI_OPTIONS_PROMPT
-            - AUTHENTICATOR_PROMPT_LOCAL
-            - AUTHENTICATOR_PROMPT_FEDERATED
-          description: |
-            The type of the current step in the authentication flow.
-            - MULTI_OPTIONS_PROMPT - The current step is for authenticator selection. In this case the currentStep will 
-              be a `MultiOptsSelectionStep`.
-            - AUTHENTICATOR_PROMPT_LOCAL - The current step is for authenticating the user through a local authenticator. 
-              In this case the currentStep will be an `AuthenticationStep`.
-            - AUTHENTICATOR_PROMPT_FEDERATED - The current step is for authenticating the user through a federated 
-              authenticator. In this case the currentStep will be an `AuthenticationStep`.
-          example: AUTHENTICATOR_PROMPT_LOCAL
         currentStep:
-          description: Contains the authenticator data related to the current step.
-          oneOf:
-            - $ref: '#/components/schemas/AuthenticationStep'
-            - $ref: '#/components/schemas/MultiOptsSelectionStep'
+          $ref: '#/components/schemas/CurrentStep'
         links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
           description: Contains the urls related to the authentication flow.
-    AuthenticationStep:
+    CurrentStep:
       type: object
       description: Contains the authenticator data related to the current step.
       required:
-        - authenticator
-        - idp
-        - i18nKey
-        - prompt
-      properties:
-        authenticator:
-          type: string
-          description: The selected authenticator for the authentication step.
-          example: BasicAuthenticator
-        idp:
-          type: string
-          description: The selected identity provider for the authentication step.
-          example: LOCAL
-        i18nKey:
-          type: string
-          description: The i18n key for the authentication step. This can be used to get the localized message for the
-            authentication step.
-          example: authenticator.basic
-        prompt:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthenticationStepPrompt'
-          description: |
-            Contains the prompt related to the authentication step. 
-            The prompt can be one of the following.
-            - USER_PROMPT - The prompt is for the user to input the required parameters for the authenticator.
-            - INTERNAL_PROMPT - The prompt is for the system to perform an internal action. ex: prompt for fido 
-              authentication, prompt for native federated authentication.
-            - REDIRECTION - The prompt is for the user to be redirected to a different url.
-            In most cases the prompt array will only contain one prompt. In the current step is for a federated 
-            authenticator the prompt array can contain multiple prompts. Which will most likely be a INTERNAL_PROMPT 
-            and a REDIRECTION prompt.
-    AuthenticationStepPrompt:
-      type: object
-      description: Contains the data related to the selected authentication step which can be used to process the user
-        authentication for the step.
-      required:
-        - type
-        - requiredParams
-      properties:
-        type:
-          type: string
-          enum:
-            - USER_PROMPT
-            - INTERNAL_PROMPT
-            - REDIRECTION
-          description: |
-            The type of the prompt. The prompt can be one of the following.
-            - USER_PROMPT - The prompt is for the user to input the required parameters for the authenticator.
-            - INTERNAL_PROMPT - The prompt is for the system to perform an internal action which will result in 
-              obtaining the required parameters. ex: prompt for fido authentication, prompt for native federated authentication.
-            - REDIRECTION - The prompt is for the user to be redirected to a different url which will result in obtaining 
-              the required parameters. ex: Authenticate using a federated authenticator which requires the user to be 
-              redirect to the federation identity provider. In this case a redirectUrl will be available in authenticatorData.
-          example: USER_PROMPT
-        requiredParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequiredParam'
-          description: Contains the required parameters for processing the authentication request specific to the
-            authenticator. These parameters will depend on the selected authenticator.
-        authenticatorData:
-          type: object
-          additionalProperties:
-            type: string
-          description: |
-            Contains any additional data related to the authenticator which would be needed for the user to perform 
-            authentication. ex: Fido2 challenge, redirectUrl for federated authentication.
-          example:
-            redirectUrl: https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=230622702223-ds23592jt.apps.googleusercontent.com&scope=openid
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-          description: Contains any messages related to the authentication step.
-    MultiOptsSelectionStep:
-      type: object
-      description: Contains the data related to multiple authentication options for a user to select the preferred option.
-      required:
-        - prompt
-      properties:
-        prompt:
-          $ref: '#/components/schemas/MultiOptsSelectionStepPrompt'
-    MultiOptsSelectionStepPrompt:
-      type: object
-      description: Contains the data related to multiple authentication options for a user to select the preferred option.
-      required:
+        - stepType
         - authenticators
         - requiredParams
       properties:
+        stepType:
+          type: string
+          enum:
+            - MULTI_OPTIONS_PROMPT
+            - AUTHENTICATOR_PROMPT
+          description: |
+            The type of the current step in the authentication flow.
+            - MULTI_OPTIONS_PROMPT - The current step is for authenticator selection.
+            - AUTHENTICATOR_PROMPT - The current step is for authenticating the user through a 
+              configured authenticator.
+          example: AUTHENTICATOR_PROMPT
         authenticators:
           type: array
           items:
-            $ref: '#/components/schemas/MultiOptsAuthenticator'
-          description: List of authenticators available for the user to select for the next step.
+            $ref: '#/components/schemas/Authenticator'
+          description: Contains the data related to the available authentication steps.
         requiredParams:
           type: array
           items:
-            $ref: '#/components/schemas/RequiredParam'
-          description: Contains the required parameters for processing the authenticator selection step.
+            type: string
+          description: |
+            Contains the required parameters that should be sent to the server for processing the current step of the 
+            authentication request.
+          example: [ "authenticator", "idp", "username", "password" ]
         messages:
           type: array
           items:
             $ref: '#/components/schemas/Message'
           description: Contains any messages related to the authentication step.
-    MultiOptsAuthenticator:
+    Authenticator:
       type: object
-      description: Contains the data related to an authenticator available for the user to select for the next step.
+      description: Contains the data related to an authenticator.
       required:
         - authenticator
         - idp
-        - i18nKey
+        - metadata
       properties:
         authenticator:
           type: string
@@ -311,32 +178,63 @@ components:
           type: string
           description: The identity provider identifier.
           example: LOCAL
+        metadata:
+          $ref: '#/components/schemas/AuthenticatorMetadata'
+    AuthenticatorMetadata:
+      type: object
+      description: Contains the metadata related to an authenticator.
+      required:
+        - i18nKey
+      properties:
         i18nKey:
           type: string
-          description: The i18n key for the authenticator. This can be used to get the localized message for the
+          description: The i18n key for the authenticator. This can be used to get the localized text for the
             authenticator.
           example: authenticator.basic
-    RequiredParam:
+        promptType:
+          type: string
+          enum:
+            - USER_PROMPT
+            - INTERNAL_PROMPT
+            - REDIRECTION_PROMPT
+          description: |
+            The type of the prompt. The prompt can be one of the following.
+            - USER_PROMPT - The prompt is for the user to input the required parameters for the authenticator.
+            - INTERNAL_PROMPT - The prompt is for the system to perform an internal action which will result in 
+              obtaining the required parameters. ex: prompt for fido authentication, prompt for native federated authentication.
+            - REDIRECTION_PROMPT - The prompt is for the user to be redirected to a different url which will result in obtaining 
+              the required parameters. ex: Authenticate using a federated authenticator which requires the user to be 
+              redirect to the federation identity provider. In this case a redirectUrl will be available in `additionalData`.
+          example: USER_PROMPT
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/Param'
+          description: |
+            Contains the data related to input parameters of the authenticator. Only present if the `promptType` is `USER_PROMPT`.
+        additionalData:
+          type: object
+          additionalProperties:
+            type: string
+          description: |
+            Contains any additional data related to the authenticator which would be needed for the application to perform 
+            authentication. ex: Fido2 challenge, redirectUrl for federated authentication.
+          example:
+            redirectUrl: https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=231644702133-ds23592jt.apps.googleusercontent.com&scope=openid
+    Param:
       type: object
-      description: Contains the data related to a required parameter for the authentication step
+      description: Contains the data related to an input parameter of the authenticator.
       required:
         - param
-      properties:
-        param:
-          type: string
-          description: The parameter identifier.
-          example: username
-        metadata:
-          $ref: '#/components/schemas/ParamMetadata'
-    ParamMetadata:
-      type: object
-      description: Contains the metadata related to a required parameter for the authentication step.
-      required:
         - type
         - isConfidential
         - order
         - i18nKey
       properties:
+        param:
+          type: string
+          description: The parameter identifier.
+          example: username
         type:
           type: string
           enum:
@@ -359,7 +257,7 @@ components:
           example: ^[\S]{3,50}$
         i18nKey:
           type: string
-          description: The i18n key for the parameter. This can be used to get the localized message for the parameter.
+          description: The i18n key for the parameter. This can be used to get the localized text for the parameter.
           example: param.username
     Message:
       type: object
@@ -368,6 +266,7 @@ components:
         - type
         - messageId
         - message
+        - i18nKey
       properties:
         type:
           type: string
@@ -384,29 +283,31 @@ components:
           type: string
           description: The message.
           example: Invalid username or password.
+        i18nKey:
+          type: string
+          description: The i18n key for the message. This can be used to get the localized text for the message.
+          example: message.msg_invalid_un_pw
         context:
           type: array
           items:
-            $ref: '#/components/schemas/Param'
+            $ref: '#/components/schemas/Context'
           description: |
             Contains any context information related to the message. The context information can be used to 
             create localized messages. The available different context information is bound to the messageId. 
             ex: failed attempt remaining count.
-          example:
-            - key: remainingAttempts
-              value: 2
-    Param:
+    Context:
       type: object
+      description: A property map to contain any context information for messages.
       required:
         - key
         - value
       properties:
         key:
           type: string
-          example: maskedNumber
+          example: remainingAttempts
         value:
           type: string
-          example: +12**********1
+          example: 2
     Link:
       type: object
       description: Contains the data related to a link.

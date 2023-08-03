@@ -1,9 +1,9 @@
 {
     "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
     "nonce": "e24edfeas1",
+    "authenticator": "BasicAuthenticator",
+    "idp": "LOCAL",
     "params": {
-        "authenticator": "BasicAuthenticator",
-        "idp": "LOCAL",
         "username": "johnd",
         "password": "a#m1N"
     }

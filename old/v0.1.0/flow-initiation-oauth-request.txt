@@ -1,0 +1,9 @@
+curl --location --request POST 'https://localhost:9443/oauth2/authorize' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=116WpHU_AiVrvFOTYWqIU9py9qQa' \
+--data-urlencode 'response_type=code' \
+--data-urlencode 'response_mode=direct' \
+--data-urlencode 'redirect_uri=https://example-app.com/redirect' \
+--data-urlencode 'state=3f23rasxf' \
+--data-urlencode 'scope=openid internal_login'

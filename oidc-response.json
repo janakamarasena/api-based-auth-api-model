@@ -7,14 +7,14 @@
         "stepType": "AUTHENTICATOR_PROMPT",
         "authenticators": [
             {
-                "authenticator": "FIDOAuthenticator",
-                "idp": "LOCAL",
+                "authenticator": "OpenIDConnectAuthenticator",
+                "idp": "Google",
                 "metadata": {
-                    "i18nKey": "authenticator.fido",
-                    "promptType": "INTERNAL_PROMPT",
+                    "i18nKey": "authenticator.oidc",
+                    "promptType": "REDIRECTION_PROMPT",
                     "params": [],
                     "additionalData": {
-                        "challengeData": "e1wicmVxdWVzdElkXCI6XCJmVWhNMXZ2UWY4Q0FhSnh5SDJveEZfSk9uejhrczV4amd5WmR0bktaWXNNXCIsXCJwdWJsaWNLZXlDcmVkZW50aWFsUmVxdWVzdE9wdGlvbnNcIjp7XCJjaGFsbGVuZ2VcIjpcIjU3Y0JUQi1keFdncmh2alhQQldDOWdTdW9DWUV0UUZFS2loQllac3pyWk1cIixcInJwSWRcIjpcImxvY2FsaG9zdFwiLFwiZXh0ZW5zaW9uc1wiOnt9fX0"
+                        "redirectUrl": "https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=231644702133-ds23592jt.apps.googleusercontent.com&scope=openid"
                     }
                 }
             }
@@ -22,7 +22,8 @@
         "requiredParams": [
             "authenticator",
             "idp",
-            "tokenResponse"
+            "code",
+            "state"
         ],
         "messages": []
     },

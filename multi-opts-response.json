@@ -3,36 +3,36 @@
     "nonce": "e24edfeas1",
     "flowStatus": "INCOMPLETE",
     "flowType": "AUTHENTICATION",
-    "currentStepType": "MULTI_OPTIONS_PROMPT",
     "currentStep": {
-        "prompt": {
-            "authenticators": [
-                {
-                    "authenticator": "BasicAuthenticator",
-                    "idp": "LOCAL",
+        "stepType": "MULTI_OPTIONS_PROMPT",
+        "authenticators": [
+            {
+                "authenticator": "BasicAuthenticator",
+                "idp": "LOCAL",
+                "metadata": {
                     "i18nKey": "authenticator.basic"
-                },
-                {
-                    "authenticator": "FIDOAuthenticator",
-                    "idp": "LOCAL",
+                }
+            },
+            {
+                "authenticator": "FIDOAuthenticator",
+                "idp": "LOCAL",
+                "metadata": {
                     "i18nKey": "authenticator.fido"
-                },
-                {
-                    "authenticator": "OpenIDConnectAuthenticator",
-                    "idp": "google",
+                }
+            },
+            {
+                "authenticator": "OpenIDConnectAuthenticator",
+                "idp": "google",
+                "metadata": {
                     "i18nKey": "authenticator.oidc"
                 }
-            ],
-            "requiredParams": [
-                {
-                    "param": "authenticator"
-                },
-                {
-                    "param": "idp"
-                }
-            ],
-            "messages": []
-        }
+            }
+        ],
+        "requiredParams": [
+            "authenticator",
+            "idp"
+        ],
+        "messages": []
     },
     "links": [
         {

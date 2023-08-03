@@ -33,7 +33,7 @@
                     }
                 ],
                 "authenticatorData": {
-                    "redirectUrl": "https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=230622702223-ds23592jt.apps.googleusercontent.com&scope=openid"
+                    "redirectUrl": "https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=231644702133-ds23592jt.apps.googleusercontent.com&scope=openid"
                 },
                 "messages": []
             }

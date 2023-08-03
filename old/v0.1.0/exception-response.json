@@ -1,0 +1,6 @@
+{
+    "code": "ABA-224124",
+    "message": "Unexpected error occured.",
+    "description": "Server encounted an error while sending SMS OTP.",
+    "traceId": "3aes652w-2fe1-p91n-as1a-as8c6jw2d12"
+}
