@@ -30,6 +30,7 @@
             "idp",
             "otp"
         ],
+        "acceptErrorParams": false,
         "messages": [
             {
                 "type": "INFO",

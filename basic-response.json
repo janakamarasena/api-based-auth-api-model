@@ -39,6 +39,7 @@
             "username",
             "password"
         ],
+        "acceptErrorParams": false,
         "messages": []
     },
     "links": [

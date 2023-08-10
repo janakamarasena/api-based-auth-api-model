@@ -25,6 +25,7 @@
             "code",
             "state"
         ],
+        "acceptErrorParams": true,
         "messages": []
     },
     "links": [

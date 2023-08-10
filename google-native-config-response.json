@@ -23,6 +23,7 @@
             "accessToken",
             "idToken"
         ],
+        "acceptErrorParams": true,
         "messages": []
     },
     "links": [

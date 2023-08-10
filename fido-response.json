@@ -24,6 +24,7 @@
             "idp",
             "tokenResponse"
         ],
+        "acceptErrorParams": true,
         "messages": []
     },
     "links": [

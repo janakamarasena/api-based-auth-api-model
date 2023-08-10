@@ -157,6 +157,13 @@ components:
             Contains the required parameters that should be sent to the server for processing the current step of the 
             authentication request.
           example: [ "authenticator", "idp", "username", "password" ]
+        acceptErrorParams:
+          type: boolean
+          description: |
+            Denote that the server is capable of handling errors on behalf of the application. When this is set to `true` 
+            and when the application is handling part of the authentication process (ex: handling federation) when there 
+            are errors, the application can send the params in the error response to the server to handle it appropriately.
+          example: false
         messages:
           type: array
           items:
