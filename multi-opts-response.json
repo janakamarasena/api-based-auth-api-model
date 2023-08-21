@@ -7,6 +7,7 @@
         "stepType": "MULTI_OPTIONS_PROMPT",
         "authenticators": [
             {
+                "authenticatorId": "QmFzaWNBdXRoZW50aWNhdG9yOkxPQ0FM",
                 "authenticator": "BasicAuthenticator",
                 "idp": "LOCAL",
                 "metadata": {
@@ -14,6 +15,7 @@
                 }
             },
             {
+                "authenticatorId": "RklET0F1dGhlbnRpY2F0b3I6TE9DQUw",
                 "authenticator": "FIDOAuthenticator",
                 "idp": "LOCAL",
                 "metadata": {
@@ -21,6 +23,7 @@
                 }
             },
             {
+                "authenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I6Z29vZ2xl",
                 "authenticator": "OpenIDConnectAuthenticator",
                 "idp": "google",
                 "metadata": {
@@ -28,10 +31,7 @@
                 }
             }
         ],
-        "requiredParams": [
-            "authenticator",
-            "idp"
-        ],
+        "requiredParams": [],
         "acceptErrorParams": false,
         "messages": []
     },

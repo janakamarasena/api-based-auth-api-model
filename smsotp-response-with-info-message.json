@@ -7,6 +7,7 @@
         "stepType": "AUTHENTICATOR_PROMPT",
         "authenticators": [
             {
+                "authenticatorId": "U01TT1RQOkxPQ0FM",
                 "authenticator": "SMSOTP",
                 "idp": "LOCAL",
                 "metadata": {
@@ -26,8 +27,6 @@
             }
         ],
         "requiredParams": [
-            "authenticator",
-            "idp",
             "otp"
         ],
         "acceptErrorParams": false,

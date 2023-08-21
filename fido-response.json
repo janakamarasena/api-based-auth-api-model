@@ -7,6 +7,7 @@
         "stepType": "AUTHENTICATOR_PROMPT",
         "authenticators": [
             {
+                "authenticatorId": "RklET0F1dGhlbnRpY2F0b3I6TE9DQUw",
                 "authenticator": "FIDOAuthenticator",
                 "idp": "LOCAL",
                 "metadata": {
@@ -20,8 +21,6 @@
             }
         ],
         "requiredParams": [
-            "authenticator",
-            "idp",
             "tokenResponse"
         ],
         "acceptErrorParams": true,

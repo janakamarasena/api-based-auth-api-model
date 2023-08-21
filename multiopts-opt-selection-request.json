@@ -1,9 +1,8 @@
 {
     "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
     "nonce": "e24edfeas1",
-    "params": {
-        "authenticator": "OpenIDConnectAuthenticator",
-        "idp": "google"
+    "selectedAuthenticator": {
+        "authenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I6Z29vZ2xl"
     },
     "requireNativeConfig": true
 }

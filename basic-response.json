@@ -7,6 +7,7 @@
         "stepType": "AUTHENTICATOR_PROMPT",
         "authenticators": [
             {
+                "authenticatorId": "QmFzaWNBdXRoZW50aWNhdG9yOkxPQ0FM",
                 "authenticator": "BasicAuthenticator",
                 "idp": "LOCAL",
                 "metadata": {
@@ -34,8 +35,6 @@
             }
         ],
         "requiredParams": [
-            "authenticator",
-            "idp",
             "username",
             "password"
         ],

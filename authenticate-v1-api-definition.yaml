@@ -51,7 +51,7 @@ components:
       required:
         - flowId
         - nonce
-        - params
+        - selectedAuthenticator
       type: object
       properties:
         flowId:
@@ -64,16 +64,8 @@ components:
           description: A unique identifier for the authentication request.
             The value of the nonce will change for each request in the flow.
           example: e24edfeas1
-        params:
-          type: object
-          description: The parameters required for the authenticator to perform user authentication.
-          additionalProperties:
-            type: string
-          example:
-            authenticator: BasicAuthenticator
-            idp: LOCAL
-            username: johnd
-            password: a#m1N
+        selectedAuthenticator:
+          $ref: '#/components/schemas/SelectedAuthenticator'
         requireNativeConfig:
           type: boolean
           description: |
@@ -81,6 +73,25 @@ components:
             set to true then the response will contain the schema relating to handling the authentication natively (INTERNAL_PROMPT). 
             If the param is not sent in the request the config will default to the system level configuration.
           example: true
+    SelectedAuthenticator:
+      type: object
+      description: Contains the data related to a selected authenticator.
+      required:
+        - authenticatorId
+      properties:
+        authenticatorId:
+          type: string
+          description: The unique identifier of the selected authenticator.
+          example: QmFzaWNBdXRoZW50aWNhdG9yOkxPQ0FM
+        params:
+          type: object
+          description: |
+            The parameters required for the authenticator to perform user authentication.
+          additionalProperties:
+            type: string
+          example:
+            username: johnd
+            password: a#m1N
     AuthResponse:
       type: object
       description: Authentication response body.
@@ -156,7 +167,7 @@ components:
           description: |
             Contains the required parameters that should be sent to the server for processing the current step of the 
             authentication request.
-          example: [ "authenticator", "idp", "username", "password" ]
+          example: [ "username", "password" ]
         acceptErrorParams:
           type: boolean
           description: |
@@ -173,10 +184,17 @@ components:
       type: object
       description: Contains the data related to an authenticator.
       required:
+        - authenticatorId
         - authenticator
         - idp
         - metadata
       properties:
+        authenticatorId:
+          type: string
+          description: |
+            The authenticator identifier. Note that this identifier is mutable and can change over time. 
+            Therefore do not base any logic on this value.
+          example: QmFzaWNBdXRoZW50aWNhdG9yOkxPQ0FM
         authenticator:
           type: string
           description: The authenticator identifier.
