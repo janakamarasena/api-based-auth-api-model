@@ -3,7 +3,7 @@
     "nonce": "e24edfeas1",
     "flowStatus": "INCOMPLETE",
     "flowType": "AUTHENTICATION",
-    "currentStep": {
+    "nextStep": {
         "stepType": "MULTI_OPTIONS_PROMPT",
         "authenticators": [
             {

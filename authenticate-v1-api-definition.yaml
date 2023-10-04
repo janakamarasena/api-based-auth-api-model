@@ -13,7 +13,7 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /:
+  /auth:
     post:
       operationId: handleAuthentication
       description: This API provides the capability to perform user authentication.
@@ -100,7 +100,7 @@ components:
         - nonce
         - flowStatus
         - flowType
-        - currentStep
+        - nextStep
         - links
       properties:
         flowId:
@@ -129,16 +129,16 @@ components:
             - AUTHENTICATION
           description: The type of the authentication flow. This version only contains flowType AUTHENTICATION.
           example: AUTHENTICATION
-        currentStep:
-          $ref: '#/components/schemas/CurrentStep'
+        nextStep:
+          $ref: '#/components/schemas/NextStep'
         links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
           description: Contains the urls related to the authentication flow.
-    CurrentStep:
+    NextStep:
       type: object
-      description: Contains the authenticator data related to the current step.
+      description: Contains the authenticator data related to the next step.
       required:
         - stepType
         - authenticators
@@ -150,9 +150,9 @@ components:
             - MULTI_OPTIONS_PROMPT
             - AUTHENTICATOR_PROMPT
           description: |
-            The type of the current step in the authentication flow.
-            - MULTI_OPTIONS_PROMPT - The current step is for authenticator selection.
-            - AUTHENTICATOR_PROMPT - The current step is for authenticating the user through a 
+            The type of the next step in the authentication flow.
+            - MULTI_OPTIONS_PROMPT - The next step is for authenticator selection.
+            - AUTHENTICATOR_PROMPT - The next step is for authenticating the user through a 
               configured authenticator.
           example: AUTHENTICATOR_PROMPT
         authenticators:

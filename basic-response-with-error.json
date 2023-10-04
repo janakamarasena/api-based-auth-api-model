@@ -3,7 +3,7 @@
     "nonce": "e24edfeas1",
     "flowStatus": "FAIL_INCOMPLETE",
     "flowType": "AUTHENTICATION",
-    "currentStep": {
+    "nextStep": {
         "stepType": "AUTHENTICATOR_PROMPT",
         "authenticators": [
             {
