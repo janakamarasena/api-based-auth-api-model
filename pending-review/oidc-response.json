@@ -1,0 +1,36 @@
+{
+    "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
+    "flowStatus": "INCOMPLETE",
+    "flowType": "AUTHENTICATION",
+    "nextStep": {
+        "stepType": "AUTHENTICATOR_PROMPT",
+        "authenticators": [
+            {
+                "authenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I6R29vZ2xl",
+                "authenticator": "openidconnect",
+                "idp": "Asgardeo",
+                "metadata": {
+                    "i18nKey": "authenticator.oidc",
+                    "promptType": "REDIRECTION_PROMPT",
+                    "params": [],
+                    "additionalData": {
+                        "redirectUrl": "https://api.asgardeo.io/t/asgard/oauth2/authorize?response_type=code&redirect_uri=https%3A%2F%2Fexample-app.com%2Fredirect&state=e12f-ed27-49e5-ad0a-8bbb5671d81e%2COIDC&client_id=23fsdg0werfm23480rfnwesd&scope=openid"
+                    }
+                },
+                "requiredParams": [
+                    "code",
+                    "state"
+                ]
+            }
+        ],
+        "acceptErrorParams": true,
+        "messages": []
+    },
+    "links": [
+        {
+            "name": "authentication",
+            "href": "/api/authenticate/v1",
+            "method": "POST"
+        }
+    ]
+}

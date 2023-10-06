@@ -1,0 +1,35 @@
+{
+    "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
+    "flowStatus": "INCOMPLETE",
+    "flowType": "AUTHENTICATION",
+    "nextStep": {
+        "stepType": "AUTHENTICATOR_PROMPT",
+        "authenticators": [
+            {
+                "authenticatorId": "RklET0F1dGhlbnRpY2F0b3I6TE9DQUw",
+                "authenticator": "Security Key/Biometrics",
+                "idp": "LOCAL",
+                "metadata": {
+                    "i18nKey": "authenticator.fido",
+                    "promptType": "INTERNAL_PROMPT",
+                    "params": [],
+                    "additionalData": {
+                        "challengeData": "e1wicmVxdWVzdElkXCI6XCJmVWhNMXZ2UWY4Q0FhSnh5SDJveEZfSk9uejhrczV4amd5WmR0bktaWXNNXCIsXCJwdWJsaWNLZXlDcmVkZW50aWFsUmVxdWVzdE9wdGlvbnNcIjp7XCJjaGFsbGVuZ2VcIjpcIjU3Y0JUQi1keFdncmh2alhQQldDOWdTdW9DWUV0UUZFS2loQllac3pyWk1cIixcInJwSWRcIjpcImxvY2FsaG9zdFwiLFwiZXh0ZW5zaW9uc1wiOnt9fX0"
+                    }
+                },
+                "requiredParams": [
+                    "tokenResponse"
+                ]
+            }
+        ],
+        "acceptErrorParams": true,
+        "messages": []
+    },
+    "links": [
+        {
+            "name": "authentication",
+            "href": "/api/authenticate/v1",
+            "method": "POST"
+        }
+    ]
+}

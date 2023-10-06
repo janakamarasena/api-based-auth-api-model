@@ -1,0 +1,62 @@
+{
+    "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
+    "flowStatus": "FAIL_INCOMPLETE",
+    "flowType": "AUTHENTICATION",
+    "nextStep": {
+        "stepType": "AUTHENTICATOR_PROMPT",
+        "authenticators": [
+            {
+                "authenticatorId": "QmFzaWNBdXRoZW50aWNhdG9yOkxPQ0FM",
+                "authenticator": "Username & Password",
+                "idp": "LOCAL",
+                "metadata": {
+                    "i18nKey": "authenticator.basic",
+                    "promptType": "USER_PROMPT",
+                    "params": [
+                        {
+                            "param": "username",
+                            "type": "STRING",
+                            "isConfidential": false,
+                            "order": 1,
+                            "i18nKey": "param.username"
+                        },
+                        {
+                            "param": "password",
+                            "type": "STRING",
+                            "isConfidential": true,
+                            "order": 2,
+                            "i18nKey": "param.password"
+                        }
+                    ],
+                    "additionalData": {}
+                },
+                "requiredParams": [
+                    "username",
+                    "password"
+                ]
+            }
+        ],
+        "acceptErrorParams": false,
+        "messages": [
+            {
+                "type": "ERROR",
+                "messageId": "msg_invalid_un_pw",
+                "message": "Invalid username or password.",
+                "i18nKey": "message.msg_invalid_un_pw",
+                "context": [
+                    {
+                        "key": "remainingAttempts",
+                        "value": 2
+                    }
+                ]
+            }
+        ]
+    },
+    "links": [
+        {
+            "name": "authentication",
+            "href": "/api/authenticate/v1",
+            "method": "POST"
+        }
+    ]
+}

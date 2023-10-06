@@ -1,0 +1,54 @@
+{
+    "flowId": "3bd1f207-e5b5-4b45-8a91-13b0acfb2151",
+    "flowStatus": "INCOMPLETE",
+    "flowType": "AUTHENTICATION",
+    "nextStep": {
+        "stepType": "AUTHENTICATOR_PROMPT",
+        "authenticators": [
+            {
+                "authenticatorId": "U01TT1RQOkxPQ0FM",
+                "authenticator": "SMS OTP",
+                "idp": "LOCAL",
+                "metadata": {
+                    "i18nKey": "authenticator.smsotp",
+                    "promptType": "USER_PROMPT",
+                    "params": [
+                        {
+                            "param": "otp",
+                            "type": "STRING",
+                            "isConfidential": true,
+                            "order": 1,
+                            "i18nKey": "param.otp"
+                        }
+                    ],
+                    "additionalData": {}
+                },
+                "requiredParams": [
+                    "otp"
+                ]
+            }
+        ],
+        "acceptErrorParams": false,
+        "messages": [
+            {
+                "type": "INFO",
+                "messageId": "sms_sent_to_phone",
+                "message": "OTP sent to phone ending with ***466",
+                "i18nKey": "message.sms_sent_to_phone",
+                "context": [
+                    {
+                        "key": "maskedNumber",
+                        "value": "***466"
+                    }
+                ]
+            }
+        ]
+    },
+    "links": [
+        {
+            "name": "authentication",
+            "href": "/api/authenticate/v1",
+            "method": "POST"
+        }
+    ]
+}
