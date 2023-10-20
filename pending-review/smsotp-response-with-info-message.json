@@ -28,7 +28,6 @@
                 ]
             }
         ],
-        "acceptErrorParams": false,
         "messages": [
             {
                 "type": "INFO",

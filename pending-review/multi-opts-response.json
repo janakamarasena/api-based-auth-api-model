@@ -54,7 +54,6 @@
                 "requiredParams": []
             }
         ],
-        "acceptErrorParams": false,
         "messages": []
     },
     "links": [
