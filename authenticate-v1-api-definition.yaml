@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
   description: >
-    This document specifies an **Authentication RESTful API** for **WSO2
+    This document specifies an **Application Native Authentication RESTful API** for **WSO2
     Identity Server** which can be used to perform complete user authentication in 
     an API based manner.
   version: v1
-  title: WSO2 Identity Server - Authentication Rest API
+  title: WSO2 Identity Server - Application Native Authentication Rest API
   contact:
     name: WSO2
     url: 'https://wso2.com/products/identity-server/'
@@ -13,7 +13,7 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /auth:
+  /authn:
     post:
       operationId: handleAuthentication
       description: This API provides the capability to perform user authentication.
@@ -50,7 +50,6 @@ components:
         Authentication request body.
       required:
         - flowId
-        - nonce
         - selectedAuthenticator
       type: object
       properties:
@@ -59,20 +58,8 @@ components:
           description: A unique identifier for the authentication flow.
             The value of the flowId will remain the same for the entire authentication flow.
           example: 3bd1f207-e5b5-4b45-8a91-13b0acfb2151
-        nonce:
-          type: string
-          description: A unique identifier for the authentication request.
-            The value of the nonce will change for each request in the flow.
-          example: e24edfeas1
         selectedAuthenticator:
           $ref: '#/components/schemas/SelectedAuthenticator'
-        requireNativeConfig:
-          type: boolean
-          description: |
-            Only applicable for federated authenticators having the capability to do the federation natively. If this is
-            set to true then the response will contain the schema relating to handling the authentication natively (INTERNAL_PROMPT). 
-            If the param is not sent in the request the config will default to the system level configuration.
-          example: true
     SelectedAuthenticator:
       type: object
       description: Contains the data related to a selected authenticator.
@@ -97,7 +84,6 @@ components:
       description: Authentication response body.
       required:
         - flowId
-        - nonce
         - flowStatus
         - flowType
         - nextStep
@@ -108,11 +94,6 @@ components:
           description: A unique identifier for the authentication flow.
             The value of the flowId will remain the same for the entire authentication flow.
           example: 3bd1f207-e5b5-4b45-8a91-13b0acfb2151
-        nonce:
-          type: string
-          description: A unique identifier for the authentication request.
-            The value of the nonce will change for each request in the flow.
-          example: e24edfeas1
         flowStatus:
           type: string
           enum:
@@ -142,7 +123,6 @@ components:
       required:
         - stepType
         - authenticators
-        - requiredParams
       properties:
         stepType:
           type: string
@@ -160,14 +140,6 @@ components:
           items:
             $ref: '#/components/schemas/Authenticator'
           description: Contains the data related to the available authentication steps.
-        requiredParams:
-          type: array
-          items:
-            type: string
-          description: |
-            Contains the required parameters that should be sent to the server for processing the current step of the 
-            authentication request.
-          example: [ "username", "password" ]
         acceptErrorParams:
           type: boolean
           description: |
@@ -198,13 +170,21 @@ components:
         authenticator:
           type: string
           description: The authenticator identifier.
-          example: BasicAuthenticator
+          example: Username & Password
         idp:
           type: string
           description: The identity provider identifier.
           example: LOCAL
         metadata:
           $ref: '#/components/schemas/AuthenticatorMetadata'
+        requiredParams:
+          type: array
+          items:
+            type: string
+          description: |
+            Contains the required parameters that should be sent to the server for processing the current step of the 
+            authentication request.
+          example: [ "username", "password" ]
     AuthenticatorMetadata:
       type: object
       description: Contains the metadata related to an authenticator.
@@ -264,7 +244,7 @@ components:
           type: string
           enum:
             - STRING
-            - NUMBER
+            - INTEGER
             - BOOLEAN
           description: Indicates the data type of the parameter.
           example: STRING
@@ -378,7 +358,7 @@ components:
           type: string
           example: e0fbcfeb-3617-43c4-8dd0-7b7d38e13047
 servers:
-  - url: 'https://{server-url}/t/{tenant-domain}/api/authenticate/v1'
+  - url: 'https://{server-url}/t/{tenant-domain}/oauth2/'
     variables:
       tenant-domain:
         default: "carbon.super"
